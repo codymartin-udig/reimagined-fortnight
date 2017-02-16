@@ -1,0 +1,17 @@
+/* Style fix thanks to: http://jsfiddle.net/b2m38br9/1/ */
+.panel-heading h3 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: normal;
+    width: 75%;
+    padding-top: 8px;
+}
+
+li.live {
+    border-bottom: 3px solid green;
+}
+
+li.dead {
+    border-bottom: 3px solid red;
+}

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Whiteboard Micro service</title>
+    <link rel="stylesheet" href="./res/bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="./res/css/main.css"/>
+    <script src="./res/jquery/jquery-3.1.1.min.js"></script>
+    <script src="./res/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                Whiteboard Inc.
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li id="internal-api-li">
+                    <a href="./index.html">
+                        Internal API
+                    </a>
+                </li>
+                <li id="external-api-li" class="active">
+                    <a href="#">
+                        Vendor API
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title pull-left"> GET /api/vendor?token=0942175430 </h3>
+                    <button class="btn btn-default pull-right" id="general-get-btn">Send</button>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="panel-body">
+                    <table class="table">
+                        <tr id="general-get-table" class="table-header">
+                            <th>ID</th>
+                            <th>Manufacturer</th>
+                            <th>Size</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Sold</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+function checkVendorApi ()
+{
+    $(function () {
+        $.get("http://55.55.55.2/vendor-api/api/vendor/status")
+            .done(function(data) {
+                if(data == true)
+                   if($("#external-api-li").hasClass("dead")) {
+                        $("#external-api-li").removeClass("dead");
+                        $("#external-api-li").addClass("live");
+                    } else if (! $("#external-api-li").hasClass("live")) {
+                        $("#external-api-li").addClass("live");
+                    }
+            })
+            .fail(function (err) {
+                if($("#external-api-li").hasClass("live")) {
+                    $("#external-api-li").removeClass("live");
+                    $("#external-api-li").addClass("dead");
+                }
+                else if (! $("#external-api-li").hasClass("dead")) {
+                     $("#external-api-li").addClass("dead");
+                }
+            })
+    })
+}
+
+
+function checkWBApi () {
+    $(function () {
+        $.get("http://55.55.55.2/app-api/api/wb/status")
+            .done(function(data) {
+                if(data == true)
+                   if($("#internal-api-li").hasClass("dead")) {
+                        $("#internal-api-li").removeClass("dead");
+                        $("#internal-api-li").addClass("live");
+                    } else if (! $("#internal-api-li").hasClass("live")) {
+                        $("#internal-api-li").addClass("live");
+                    }
+            })
+            .fail(function (err) {
+                if($("#internal-api-li").hasClass("live")) {
+                    $("#internal-api-li").removeClass("live");
+                    $("#internal-api-li").addClass("dead");
+                }
+                else if (! $("#internal-api-li").hasClass("dead")) {
+                     $("#internal-api-li").addClass("dead");
+                }
+            })
+    })
+}
+
+
+
+setInterval(checkVendorApi, 3000);
+setInterval(checkWBApi, 3000);
+
+
+checkVendorApi();
+checkWBApi();
+
+
+
+
+
+
+
+
+
+
+
+
+console.log('here');
+</script>
+
+<!-- <script src="./res/js/functions.js"></script> -->
+
+<script>
+
+
+
+$("#general-get-btn").click(function ()
+{
+    $.getJSON("http://55.55.55.2/vendor-api/api/vendor?token=0942175430", function(data) {
+        var rows = "";
+        data.map(function (d)  {
+            rows += "<tr>" +
+            "<td>" + d.id + "</td>" +
+            "<td>" + d.manufacturer + "</td>" +
+            "<td>" + d.size + "</td>" +
+            "<td>" + d.price + "</td>" +
+            "<td>" + d.quantity + "</td>" +
+            "<td>" + d.sold + "</td>"
+            + "</tr>";
+            console.log(d);
+        });
+        $("#general-get-table").after(rows);
+    });
+ });
+
+ console.log('here22');
+
+
+</script>
+<!-- <script src="./res/js/vendor.js"></script> -->
+</body>
+</html>

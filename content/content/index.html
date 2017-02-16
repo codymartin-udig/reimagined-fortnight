@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Whiteboard Monoltith</title>
+    <link rel="stylesheet" href="./content/res/bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="./content/res/css/main.css"/>
+    <script src="./content/res/jquery/jquery-3.1.1.min.js"></script>
+    <script src="./content/res/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    Whiteboard Inc.
+                </a>
+            </div>
+
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li id="internal-api-li" class="active live">
+                        <a href="/content">
+                            Internal API
+                        </a>
+                    </li>
+                    <li id="external-api-li" class="dead">
+                        <a href="./content/vendor.html">
+                            Vendor API
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title pull-left"> GET api/wb </h3>
+                        <button class="btn btn-default pull-right" id="general-get-btn">Send</button>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table">
+                            <tr id="general-get-table" class="table-header">
+                                <th>ID</th>
+                                <th>Manufacturer</th>
+                                <th>Size</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Sold</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title pull-left"> POST /api/wb </h3>
+                        <button class="btn btn-default pull-right" id="general-post-btn">Send</button>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-body">
+                       <form id="createForm" onsubmit="false">
+                           <input type="text" name="manufacturer" id="manufacturer" class="form-control" aria-label="manufacturer" placeholder="Manufacturer"/>
+                           <input type="text" name="size" id="size" class="form-control" aria-label="size" placeholder="Size"/>
+                           <input type="text" name="price" id="price" class="form-control" aria-label="price" placeholder="Price"/>
+                           <input type="text" name="quantity" id="quantity" class="form-control" aria-label="quantity" placeholder="Quantity"/>
+                       </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./content/res/js/functions.js"></script>
+    <script src="./content/res/js/wb.js"></script>
+</body>
+</html>
